@@ -58,12 +58,13 @@ def know_money():
         money_one = float(dict(currency_read['data']).get(f"{combobox_country_one.get()}"))
         money_two = float(dict(currency_read['data']).get(f"{combobox_country_two.get()}"))
         solve_money = float(entry_money.get())
-    except NameError:
+    except TypeError:
         messagebox.showerror("NameError", "check your info one more time!")
     else:
         all_math = money_two / money_one * solve_money
         enter_money = Label(wn, text=f"{float(all_math)}", font=(13), bg='limegreen', fg='red')
         enter_money.grid(row=20, column=0)
+        entry_money.delete(0, END)
 
 
 # Go button
