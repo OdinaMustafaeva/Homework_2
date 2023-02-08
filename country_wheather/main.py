@@ -19,20 +19,15 @@ def show_weather():
 
     response = requests.get(url, headers=headers)
     for s in range(5):
-        x1 = s + 2
         day = response.json()['timelines']['daily'][s]['time']
         day_label = Label(wn, text=day[0:10], fg='blue', bg='white')
-        day_label.grid(row=5 + x1 + 1)
+        day_label.grid(row=4 + s, column=0)
         for i in range(len(response.json()['timelines']['hourly'])):
             h = response.json()['timelines']['hourly'][i]['time']
-            h1 = response.json()['timelines']['hourly'][i]['values']['temperature']
             day_label = Label(wn,
-                              text=f"{h[12:16]} : {h1}",
+                              text=f"{h[12:16]} = {response.json()['timelines']['hourly'][i]['values']['temperature']}",
                               fg='green', bg='skyblue')
-            if i > 5:
-                day_label.grid(row=5 + x1 + 2, column=i)
-            else:
-                day_label.grid(row=5 + x1 + 1, column=i)
+            day_label.grid(row=4 + s, column=i + 1)
 
 
 weather_text_label = Label(wn, text='Weather application', fg='White', bg='skyblue', font=(26))
